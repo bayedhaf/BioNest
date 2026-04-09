@@ -1,60 +1,82 @@
-
 import Link from 'next/link'
-import {LayoutDashboard ,Palette , BarChart3, Settings, CreditCard, Link as LinkIcon } from 'lucide-react'
 import Image from 'next/image'
+import {
+  LayoutDashboard,
+  Palette,
+  BarChart3,
+  Settings,
+  CreditCard,
+  Link as LinkIcon
+} from 'lucide-react'
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarGroup,
+  SidebarGroupContent,
+} from "@/components/ui/sidebar"
 
-export default function Sidebar() {
+const menuItems = [
+  { title: "Dashboard", icon: LayoutDashboard, url: "/dashboard" },
+  { title: "Links", icon: LinkIcon, url: "/dashboard/links" },
+  { title: "Analytics", icon: BarChart3, url: "/dashboard/analytics" },
+  { title: "Themes", icon: Palette, url: "/themes" },
+  { title: "Billings", icon: CreditCard, url: "/billings" },
+  { title: "Settings", icon: Settings, url: "/settings" },
+]
+
+export default function AppSidebar() {
   return (
-    
-    
-    <>
-        <div>
-          <Link href="/" className="flex items-center gap-3 mb-10 group">
-              <div className="relative h-20 w-20 -mr-2 flex items-center justify-center transition-all duration-300">
-                  <Image 
-                    src="/uploads/logo33.png" 
-                    alt="BioNest Logo" 
-                    fill
-                    priority
-                    className="object-contain brightness-150 contrast-125 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(16,185,129,0.2)]"
-                  />
-                </div>
-            <span className="text-lg font-bold text-white group-hover:text-emerald-400 transition">
-              BioNest
-            </span>
-          </Link>
+    <Sidebar className="border-zinc-800 bg-[#0F172A]">
+      <SidebarHeader className="pt-6 px-4 bg-[#0F172A]">
+        <Link href="/" className="flex items-center gap-2 group mb-6">
+          <div className="relative h-10 w-10 flex items-center justify-center">
+            <Image
+              src="/uploads/logo33.png"
+              alt="BioNest Logo"
+              fill
+              className="object-contain brightness-150 group-hover:scale-110 transition-transform duration-300"
+            />
+          </div>
+          <span className="text-xl font-bold text-white group-hover:text-emerald-400 transition">
+            BioNest
+          </span>
+        </Link>
+      </SidebarHeader>
 
-          <nav className="flex flex-col gap-4">
-            <Link href="/dashboard" className="flex items-center gap-3 text-zinc-400 hover:text-[#50C878] transition">
-              <LayoutDashboard size={18} /> Dashboard
-            </Link>
+      <SidebarContent className="bg-[#0F172A]">
+        <SidebarGroup>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {menuItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  {/* Remove the 'tooltip' prop here if the error persists, 
+                      or ensure shadcn/ui/sidebar.tsx is up to date */}
+                  <SidebarMenuButton asChild>
+                    <Link 
+                      href={item.url} 
+                      className="flex items-center gap-3 text-zinc-400 hover:text-[#50C878] hover:bg-white/5 transition-all py-6"
+                    >
+                      <item.icon className="w-5 h-5" />
+                      <span className="text-[15px] font-medium">{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
 
-            <Link href="/links" className="flex items-center gap-3 text-zinc-400 hover:text-[#50C878] transition">
-              <LinkIcon size={18} /> Links
-            </Link>
-
-            <Link href="/analytics" className="flex items-center gap-3 text-zinc-400 hover:text-[#50C878] transition">
-              <BarChart3 size={18} /> Analytics
-            </Link>
-             <Link href="/themes" className="flex items-center gap-3 text-zinc-400 hover:text-[#50C878] transition">
-              <Palette  size={18} /> Themes
-            </Link>
-            <Link href="/billings" className="flex items-center gap-3 text-zinc-400 hover:text-[#50C878] transition">
-              <CreditCard size={18} /> Billings
-            </Link>
-
-
-            <Link href="/settings" className="flex items-center gap-3 text-zinc-400 hover:text-[#50C878] transition">
-              <Settings size={18} /> Settings
-            </Link>
-          </nav>
+      <SidebarFooter className="p-4 border-t border-zinc-800 bg-[#0F172A]">
+        <div className="text-[10px] text-zinc-500 font-medium tracking-widest">
+          © 2026 BIONEST
         </div>
-
-        {/* Footer */}
-        <div className="text-xs text-zinc-500">
-          © 2026 BioNest
-        </div>
-      </>
-   
+      </SidebarFooter>
+    </Sidebar>
   )
 }
