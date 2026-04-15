@@ -1,13 +1,16 @@
-import Link from 'next/link'
-import Image from 'next/image'
+"use client"
+
+import Link from "next/link"
+import Image from "next/image"
 import {
   LayoutDashboard,
   Palette,
   BarChart3,
   Settings,
   CreditCard,
-  Link as LinkIcon
-} from 'lucide-react'
+  Link as LinkIcon,
+} from "lucide-react"
+
 import {
   Sidebar,
   SidebarContent,
@@ -32,6 +35,8 @@ const menuItems = [
 export default function AppSidebar() {
   return (
     <Sidebar className="border-zinc-800 bg-[#0F172A]">
+      
+      {/* Header */}
       <SidebarHeader className="pt-6 px-4 bg-[#0F172A]">
         <Link href="/" className="flex items-center gap-2 group mb-6">
           <div className="relative h-10 w-10 flex items-center justify-center">
@@ -48,23 +53,26 @@ export default function AppSidebar() {
         </Link>
       </SidebarHeader>
 
+      {/* Content */}
       <SidebarContent className="bg-[#0F172A]">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  {/* Remove the 'tooltip' prop here if the error persists, 
-                      or ensure shadcn/ui/sidebar.tsx is up to date */}
-                  <SidebarMenuButton asChild>
-                    <Link 
-                      href={item.url} 
-                      className="flex items-center gap-3 text-zinc-400 hover:text-[#50C878] hover:bg-white/5 transition-all py-6"
+                  
+                  {/* ✅ FIX: Link wraps the button (NO asChild) */}
+                  <Link href={item.url} className="block">
+                    <SidebarMenuButton
+                      className="flex items-center gap-3 text-zinc-400 hover:text-[#50C878] hover:bg-white/5 transition-all py-6 w-full hover:border-r-2 hover:border-r-[#50C878]"
                     >
                       <item.icon className="w-5 h-5" />
-                      <span className="text-[15px] font-medium">{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
+                      <span className="text-[15px] font-medium">
+                        {item.title}
+                      </span>
+                    </SidebarMenuButton>
+                  </Link>
+
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
@@ -72,11 +80,13 @@ export default function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
+      {/* Footer */}
       <SidebarFooter className="p-4 border-t border-zinc-800 bg-[#0F172A]">
         <div className="text-[10px] text-zinc-500 font-medium tracking-widest">
           © 2026 BIONEST
         </div>
       </SidebarFooter>
+
     </Sidebar>
   )
 }

@@ -222,7 +222,7 @@ export default function LinksPage() {
                 type="button" 
                 variant="outline" 
                 onClick={() => setIsSheetOpen(false)}
-                className="flex-1 py-6 text-lg border-zinc-800 hover:bg-zinc-800"
+                className="flex-1 py-6 text-black text-lg border-zinc-800 hover:bg-zinc-800"
               >
                 Cancel
               </Button>

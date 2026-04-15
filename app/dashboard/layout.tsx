@@ -3,10 +3,12 @@ import { UserButton } from '@clerk/nextjs'
 import { Button } from '@/components/ui/button'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import AppSidebar from '@/components/dashboard/Sidebar'
+import UserSync from '@/components/common/UserSync'
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
+      <UserSync />
       <div className="flex min-h-screen w-full bg-[#0F172A] text-zinc-100">
         <AppSidebar />
         
@@ -41,7 +43,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 {/* User Controls */}
                 <div className="flex items-center gap-3 border-l border-zinc-800 pl-4">
                    <UserButton 
-                    afterSignOutUrl="/" 
                     appearance={{
                       elements: {
                         avatarBox: "h-9 w-9 border-2 border-emerald-500/20"
