@@ -26,6 +26,7 @@ model Profile {
   userId      String   @unique
   user        User     @relation(fields: [userId], references: [clerkId])
   displayName String
+  title       String?
   bio         String?
   avatar      String?
   isPublic    Boolean  @default(true)

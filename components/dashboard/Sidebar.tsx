@@ -9,6 +9,7 @@ import {
   Settings,
   CreditCard,
   Link as LinkIcon,
+  User,
 } from "lucide-react"
 
 import {
@@ -29,7 +30,9 @@ const menuItems = [
   { title: "Analytics", icon: BarChart3, url: "/dashboard/analytics" },
   { title: "Themes", icon: Palette, url: "/themes" },
   { title: "Billings", icon: CreditCard, url: "/billings" },
+   {title:"Profile", icon: User, url: "/dashboard/profile"},
   { title: "Settings", icon: Settings, url: "/settings" },
+  
 ]
 
 export default function AppSidebar() {
